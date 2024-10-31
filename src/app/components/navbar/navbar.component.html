@@ -1,0 +1,35 @@
+<header>
+  <a routerLink="/" class="logo">
+    <img src="assets/hospital-logo-icons8.png" alt="" />
+    <h1 class="fw-bold">CLINICA ONLINE</h1>
+  </a>
+  <nav>
+    <a routerLink="/bienvenida">Home</a>
+
+    @if(authService.currentUserSig()?.rol == "admin"){
+    <a routerLink="/usuarios">Usuarios</a>
+    <a routerLink="/estadisticas">Estadisticas</a>
+    } @if(authService.currentUserSig()?.rol == "paciente" || authService.currentUserSig()?.rol == "admin"){
+    <a routerLink="/solicitar-turno">Solicitar Turno</a>
+    } @if(authService.currentUserSig()?.rol == "paciente" || authService.currentUserSig()?.rol == "especialista"){
+    <a routerLink="/mis-turnos">Mis Turnos</a>
+    } @if(authService.currentUserSig()?.rol == "admin"){
+    <a routerLink="/turnos">Turnos</a>
+    } @if(authService.currentUserSig()?.rol == "especialista"){
+    <a routerLink="/ver-historial-clinica">Pacientes</a>
+    } @if(authService.currentUserSig() != null){
+    <a routerLink="/mi-perfil">Mi Perfil</a>
+    }
+
+    @if(authService.currentUserSig() == null || authService.currentUserSig() == undefined){
+    <button class="btn btn-success boton" routerLink="/login">Login</button>
+    <button class="btn btn-primary boton" routerLink="/registro">Registro</button>
+    } @else{
+    <p class="p-nav">{{(authService.currentUserSig())?.email}}</p>
+    <button class="btn btn-danger boton" (click)="cerrarSesion()">
+      Cerrar sesion
+    </button>
+    }
+
+  </nav>
+</header>

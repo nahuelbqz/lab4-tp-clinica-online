@@ -1,0 +1,87 @@
+.min-100vh {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("../../../../public/assets/hospital-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  z-index: 1;
+  padding-top: 150px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+}
+
+.contenedorTablas {
+  width: 2000px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 30px;
+  border: 2px solid #7c9;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+table td {
+  background-color: #fff;
+}
+
+.imgPerfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.contenedorBotones {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.boton {
+  padding: 10px;
+  font-size: 18px;
+  margin: 10px;
+  min-width: 200px;
+}

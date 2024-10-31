@@ -1,0 +1,302 @@
+<div class="bg-info d-flex justify-content-center align-items-center min-100vh">
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <img src="../../../assets/hospital-logo-icons8.png" alt="login-icon" style="height: 6rem" />
+    </div>
+    <div class="text-center fs-1 fw-bold">
+      REGISTRO
+    </div>
+
+    <!-- Form Paciente -->
+    @if(opcionAlta == "paciente"){
+    <form [formGroup]="formPaciente" (ngSubmit)="onSubmitPaciente()">
+      <!-- Correo electronico -->
+      <div class="input-group mt-4">
+        <input formControlName="mail" class="form-control bg-light" type="text" placeholder="Email" />
+      </div>
+      @if(formPaciente.get('mail'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Contraseña -->
+      <div class="input-group mt-1">
+        <input formControlName="password" class="form-control bg-light" type="password" placeholder="Password" />
+      </div>
+      @if(formPaciente.get('password'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Nombre Y Apellido -->
+      <div class="row mt-1">
+        <div class="col">
+          <input formControlName="nombre" class="form-control bg-light" type="text" placeholder="Nombre" required />
+        </div>
+        <div class="col">
+          <input formControlName="apellido" class="form-control bg-light" type="text" placeholder="Apellido" required />
+        </div>
+      </div>
+      @if(formPaciente.get('apellido'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formPaciente.get('nombre'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Edad -->
+      <div class="input-group mt-1">
+        <input formControlName="edad" class="form-control bg-light" type="number" placeholder="Edad" required />
+      </div>
+      @if(formPaciente.get('edad'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+
+      <!-- DNI -->
+      <div class="input-group mt-1">
+        <input formControlName="dni" class="form-control bg-light" type="number" placeholder="DNI" required />
+      </div>
+      @if(formPaciente.get('dni'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Obra Social -->
+      <div class="input-group mt-1">
+        <input formControlName="obraSocial" class="form-control bg-light" type="text" placeholder="Obra Social" />
+      </div>
+      @if(formPaciente.get('obraSocial'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Foto 1 -->
+      <div class="input-group mt-1">
+        <input (change)="onFileSelected1($event)" type="file" class="form-control" formControlName="foto1" />
+        <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
+      </div>
+      @if(formPaciente.get('foto1'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Foto 2 -->
+      <div class="input-group mb-3 mt-1">
+        <input (change)="onFileSelected2($event)" type="file" class="form-control" formControlName="foto2" />
+        <label class="input-group-text" for="inputGroupFile02">Foto 2</label>
+      </div>
+      @if(formPaciente.get('foto2'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Boton -->
+      <button [disabled]="!formPaciente.valid" type="submit"
+        class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm">
+        Registrarse
+      </button>
+    </form>
+    }
+
+    <!-- Form Especialista -->
+    @if(opcionAlta == "especialista"){
+    <form [formGroup]="formEspecialista" (ngSubmit)="onSubmitEspecialista()">
+      <!-- Correo electronico -->
+      <div class="input-group mt-4">
+        <input formControlName="mail" class="form-control bg-light" type="text" placeholder="Email" />
+      </div>
+      @if(formEspecialista.get('mail'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Contraseña -->
+      <div class="input-group mt-1">
+        <input formControlName="password" class="form-control bg-light" type="password" placeholder="Password" />
+      </div>
+      @if(formEspecialista.get('password'); as aux){ @if(aux.invalid &&
+      (aux.dirty || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Nombre Y apellido -->
+
+      <div class="row mt-1">
+        <div class="col">
+          <input formControlName="nombre" class="form-control bg-light" type="text" placeholder="Nombre" required />
+        </div>
+        <div class="col">
+          <input formControlName="apellido" class="form-control bg-light" type="text" placeholder="Apellido" required />
+        </div>
+      </div>
+      @if(formEspecialista.get('nombre'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formEspecialista.get('apellido'); as aux){ @if(aux.invalid &&
+      (aux.dirty || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Edad -->
+      <div class="input-group mt-1">
+        <input formControlName="edad" class="form-control bg-light" type="number" placeholder="Edad" required />
+      </div>
+      @if(formEspecialista.get('edad'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- DNI -->
+      <div class="input-group mt-1">
+        <input formControlName="dni" class="form-control bg-light" type="number" placeholder="Dni" required />
+      </div>
+      @if(formEspecialista.get('dni'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Especialidad -->
+      <label class="form-label mt-1 fw-bold">Especialidad/es</label>
+      <div formArrayName="especialidades" *ngFor="let especialidad of especialidades.controls; let i = index">
+        <div [formGroupName]="i" class="input-group mt-1">
+          <select formControlName="nombre" class="form-select" aria-label="Seleccione una especialidad">
+            <option *ngFor="let especialidad of arrayEspecialidades" [value]="especialidad.nombre">
+              {{ especialidad.nombre }}
+            </option>
+          </select>
+          <button type="button" class="btn btn-danger" (click)="removeEspecialidad(i)">Eliminar</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary mt-2" (click)="addEspecialidad()">Agregar Especialidad</button>
+
+      <button type="button" class="btn btn-primary mt-2" routerLink="/crear-especialidad">Crear especialidad</button>
+
+      <!-- Foto 3 -->
+      <div class="input-group mt-3">
+        <input (change)="onFileSelected3($event)" type="file" class="form-control" formControlName="foto3" />
+        <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
+      </div>
+      @if(formEspecialista.get('foto3'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Boton -->
+      <button [disabled]="!formEspecialista.valid" type="submit"
+        class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm">
+        Registrarse
+      </button>
+    </form>
+    }
+
+    <!-- Form Admin -->
+    @if(opcionAlta == "admin"){
+    <form [formGroup]="formAdmin" (ngSubmit)="onSubmitAdmin()">
+      <!-- Correo electronico -->
+      <div class="input-group mt-4">
+        <input formControlName="mail" class="form-control bg-light" type="text" placeholder="Email" />
+      </div>
+      @if(formAdmin.get('mail'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Contraseña -->
+      <div class="input-group mt-1">
+        <input formControlName="password" class="form-control bg-light" type="password" placeholder="Password" />
+      </div>
+      @if(formAdmin.get('password'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Nombre Y apellido -->
+      <div class="row mt-1">
+        <div class="col">
+          <input formControlName="nombre" class="form-control bg-light" type="text" placeholder="Nombre" required />
+        </div>
+        <div class="col">
+          <input formControlName="apellido" class="form-control bg-light" type="text" placeholder="Apellido" required />
+        </div>
+      </div>
+      @if(formAdmin.get('apellido'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }} @if(formAdmin.get('nombre'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+
+      <!-- Edad -->
+      <div class="input-group mt-1">
+        <input formControlName="edad" class="form-control bg-light" type="number" placeholder="Edad" required />
+      </div>
+      @if(formEspecialista.get('edad'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+
+      <!-- DNI -->
+      <div class="input-group mt-1">
+        <input formControlName="dni" class="form-control bg-light" type="number" placeholder="Dni" required />
+      </div>
+      @if(formEspecialista.get('dni'); as aux){ @if(aux.invalid && (aux.dirty
+      || aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+
+      <!-- Foto 1 -->
+      <div class="input-group mt-1">
+        <input (change)="onFileSelected4($event)" type="file" class="form-control" formControlName="foto1" />
+        <label class="input-group-text" for="inputGroupFile02">Foto 1</label>
+      </div>
+      @if(formAdmin.get('foto1'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <!-- Boton -->
+      <button [disabled]="!formAdmin.valid" type="submit"
+        class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm">
+        Registrarse
+      </button>
+    </form>
+    }
+    <div class="d-flex gap-1 justify-content-center mt-4">
+      <div>Ya tenes una cuenta?</div>
+      <a routerLink="/login" class="text-decoration-none text-info fw-semibold">Ir al login</a>
+    </div>
+  </div>
+</div>

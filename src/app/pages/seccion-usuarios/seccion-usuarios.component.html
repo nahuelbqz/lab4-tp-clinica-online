@@ -1,0 +1,78 @@
+<div class="min-100vh">
+  <div class="container">
+    <div class="contenedorTablas">
+      <h2 class="h2 text-white fw-bold">ESPECIALISTAS</h2>
+      <table class="table table-especialistas">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>DNI</th>
+            <th>Especialidad</th>
+            <th>Correo</th>
+            <th>Validado</th>
+            <th>Imagen</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of listaEspecialistas; track usuario.id) {
+          <tr>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellido }}</td>
+            <td>{{ usuario.edad }}</td>
+            <td>{{ usuario.dni }}</td>
+            <td>{{ usuario.especialidad }}</td>
+            <td>{{ usuario.mail }}</td>
+            <td>{{ usuario.estaValidado ? "Si" : "No" }}</td>
+            <td><img class="imgPerfil" [src]="usuario.imagenUno" alt="Imagen de perfil"></td>
+            <td>
+              <button (click)="validarEspecialista(usuario)" class="btn btn-success">
+                {{ usuario.estaValidado ? "Remover" : "Validar" }}
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+
+      <h2 class="h2 text-white fw-bold">PACIENTES</h2>
+      <table class="table table-pacientes">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>DNI</th>
+            <th>Obra Social</th>
+            <th>Correo</th>
+            <th>Imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of listaPacientes; track usuario.id) {
+          <tr>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellido }}</td>
+            <td>{{ usuario.edad }}</td>
+            <td>{{ usuario.dni }}</td>
+            <td>{{ usuario.obraSocial }}</td>
+            <td>{{ usuario.mail }}</td>
+            <td><img class="imgPerfil" [src]="usuario.imagenUno" alt="Imagen de perfil"></td>
+          </tr>
+          }
+        </tbody>
+      </table>
+
+      <div class="contenedorBotones">
+        <!-- <button type="button" class="btn btn-success boton" routerLink="/verHistorialClinica">
+          Ver historial clínica de los pacientes
+        </button> -->
+        <button type="button" class="btn btn-success boton" routerLink="/registro">
+          Registrar Usuarios
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

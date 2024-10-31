@@ -1,0 +1,101 @@
+.min-100vh {
+  min-height: 100vh;
+  background-image: url("../../../../public/assets/hospital-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.min-100vh::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-size: cover;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 30px;
+  border: 2px solid #7c9;
+  padding: 35px;
+  width: 70rem;
+  align-items: center;
+  justify-content: center;
+}
+h1 {
+  color: #fff;
+  font-weight: bolder;
+  font-size: 80px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+h3 {
+  color: #fff;
+  font-weight: bolder;
+  text-align: center;
+}
+p {
+  font-size: 18px;
+  color: #fff;
+}
+
+.img {
+  width: 30rem;
+  height: 25rem;
+  object-fit: cover;
+  border-radius: 10px 0px 0px 10px;
+  box-shadow: 2px 0px 4px #747e80;
+}
+
+/*      BOTON        */
+.container-btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px; /* Espacio entre el texto y los botones */
+}
+
+.btn-boton {
+  position: relative;
+  top: 30px;
+  left: 70px;
+  border-radius: 10px;
+  height: 70px;
+  width: 160px;
+  margin: 10px;
+  border: 3px solid #000;
+  background-color: #7c9;
+  font-weight: bold;
+  font-size: 24px;
+}
+.btn-boton:hover {
+  color: #fff;
+  background: #3c9;
+  cursor: pointer;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* Responsivo para dispositivos más pequeños */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: center; /* Centra todos los elementos */
+  }
+
+  .col,
+  .col-img {
+    align-items: center;
+    text-align: center; /* Centra el texto */
+    flex: none; /* Resetea el flex a su valor por defecto */
+    width: 100%; /* Hace que las columnas ocupen todo el ancho */
+  }
+
+  .img {
+    max-width: 80%;
+  }
+
+  .btn-boton {
+    width: 80%; /* Hace que los botones ocupen el 80% del contenedor */
+  }
+}

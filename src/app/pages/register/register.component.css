@@ -1,0 +1,28 @@
+.containerBackground {
+  margin-top: 180px;
+}
+.min-100vh {
+  min-height: 100vh;
+  background-image: url("../../../../public/assets/hospital-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 30px;
+  border: 2px solid #7c9;
+  padding: 35px;
+  width: 27rem; 
+  align-items: center;
+  justify-content: center;
+}
+
+.colorMain {
+  background-color: #009970;
+}
+
+.a-especialdiad {
+  color: #7c9;
+}

@@ -1,0 +1,29 @@
+<div class="bg-info d-flex justify-content-center align-items-center min-100vh">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <img src="./assets/hospital-logo-icons8.png" alt="login-icon" style="height: 6rem" />
+        </div>
+        <div class="text-center fs-1 fw-bold">
+            NUEVA ESPECIALIDAD
+        </div>
+        <form [formGroup]="formEspecialidad" (ngSubmit)="onSubmitEspecialidad()">
+            <!-- Especialidad -->
+            <div class="input-group mt-4">
+                <input formControlName="nombreEspecialidad" class="form-control bg-light" type="text"
+                    placeholder="Especialidad" />
+            </div>
+            @if(formEspecialidad.get('nombreEspecialidad'); as aux){ @if(aux.invalid && (aux.dirty ||
+            aux.touched)){
+            <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+                {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+            </div>
+            }}
+            <!-- Boton -->
+            <button [disabled]="!formEspecialidad.valid" type="submit"
+                class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm">
+                Crear especialidad
+            </button>
+        </form>
+
+    </div>
+</div>

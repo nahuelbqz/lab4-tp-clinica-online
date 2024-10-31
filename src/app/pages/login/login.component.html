@@ -1,0 +1,84 @@
+<div class="login-container">
+  @if (spinner) {
+  <div class="contenedor-spinner">
+    <div class="loader"></div>
+  </div>
+  }
+
+  <div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="paste-button">
+      <button class="button-dropdown">Acceso rapido &nbsp; ▼</button>
+      <div class="dropdown-content">
+        <a id="top" class="btn-acceso-rapido" (click)="cargarUsuario(1)">Paciente 1</a>
+        <a id="middle" class="btn-acceso-rapido" (click)="cargarUsuario(2)">Paciente 2</a>
+        <a id="middle" class="btn-acceso-rapido" (click)="cargarUsuario(3)">Paciente 3</a>
+        <a id="middle" class="btn-acceso-rapido" (click)="cargarUsuario(4)">Especialista 1</a>
+        <a id="middle" class="btn-acceso-rapido" (click)="cargarUsuario(5)">Especialista 2</a>
+        <a id="bottom" class="btn-acceso-rapido" (click)="cargarUsuario(6)">Admin</a>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <div class="d-flex justify-content-center">
+        <img src="/assets/hospital-logo-icons8.png" alt="login-icon" style="height: 7rem" />
+      </div>
+      <div class="text-center fs-1 fw-bold texto-blanco">LOGIN</div>
+      <!-- Form -->
+      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+        <div class="input-group mt-4">
+          <div class="input-group-text">
+            <img src="/assets/login-icon.png" alt="username-icon" style="height: 1rem" />
+          </div>
+          <input formControlName="email" class="form-control bg-light" type="text" placeholder="Email" />
+        </div>
+        @if(formLogin.get('email'); as aux){ @if(aux.invalid && (aux.dirty ||
+        aux.touched)){
+        <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+          {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+        </div>
+        } }
+
+        <div class="input-group mt-1">
+          <div class="input-group-text">
+            <img src="/assets/password-icon.png" alt="password-icon" style="height: 1rem" />
+          </div>
+          <input formControlName="password" class="form-control bg-light" type="password" placeholder="Password" />
+        </div>
+        @if(formLogin.get('password'); as aux){ @if(aux.invalid && (aux.dirty ||
+        aux.touched)){
+        <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+          {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+        </div>
+        }}
+
+        <!-- Captcha -->
+        <br />
+        <p class="captcha">
+          {{ captcha }}
+        </p>
+        <p class="fw-bold m-1 texto-blanco">Ingrese los caracteres de arriba</p>
+        <div class="input-group mt-1">
+          <div class="input-group-text">
+            <img src="/assets/recaptcha.png" alt="captcha-icon" style="height: 1rem" />
+          </div>
+          <input formControlName="captcha" type="text" class="form-control bg-light" placeholder="Captcha" />
+        </div>
+
+        @if(formLogin.get('captcha'); as aux){ @if(aux.invalid && (aux.dirty ||
+        aux.touched)){
+        <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+          {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+        </div>
+        }}
+
+        <button [disabled]="!formLogin.valid" type="submit" class="btn w-100 mt-4 fw-bold shadow-sm">
+          Iniciar sesion
+        </button>
+      </form>
+      <div class="d-flex gap-1 justify-content-center mt-1">
+        <div class="fw-bold texto-blanco">No tenes una cuenta?</div>
+        <a routerLink="/registro" class="text-decoration-none text-info fw-bold">Registrarse</a>
+      </div>
+    </div>
+  </div>
+</div>

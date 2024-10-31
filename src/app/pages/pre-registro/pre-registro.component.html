@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button (click)="cambiarResultado('especialista')" class="boton" type="button">
+                    ESPECIALISTA
+                </button>
+            </div>
+            <div class="col">
+                <button (click)="cambiarResultado('paciente')" class="boton" type="button">
+                    PACIENTE
+                </button>
+            </div>
+            @if(this.authService.currentUserSig()?.rol == "admin"){
+            <div class="col">
+                <button (click)="cambiarResultado('admin')" class="boton" type="button">
+                    ADMIN
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+</div>
