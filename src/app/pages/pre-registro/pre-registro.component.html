@@ -2,19 +2,19 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <button (click)="cambiarResultado('especialista')" class="boton" type="button">
-                    ESPECIALISTA
+                <button (click)="cambiarResultado('especialista')" class="boton" type="button" title="Especialista">
+                    <img src="assets/doctor.png" alt="doc" />
                 </button>
             </div>
             <div class="col">
-                <button (click)="cambiarResultado('paciente')" class="boton" type="button">
-                    PACIENTE
+                <button (click)="cambiarResultado('paciente')" class="boton" type="button" title="Paciente">
+                    <img src="/assets/paciente.png" alt="paciente" />
                 </button>
             </div>
-            @if(this.authService.currentUserSig()?.rol == "admin"){
+            @if(this.authService.currentUserSig()?.rol == "admin") {
             <div class="col">
-                <button (click)="cambiarResultado('admin')" class="boton" type="button">
-                    ADMIN
+                <button (click)="cambiarResultado('admin')" class="boton" type="button" title="Admin">
+                    <img src="assets/administrador.png" alt="admin" />
                 </button>
             </div>
             }

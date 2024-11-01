@@ -12,26 +12,34 @@
   border-radius: 30px;
   border: 2px solid #7c9;
   padding: 35px;
-  width: 42%;
+  width: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .boton {
-  font-size: 30px;
-  font-weight: bolder;
-  color: #000;
-  height: 15vh;
-  width: 15vw;
-  margin: 20px 10px;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
   background: #7c9;
-  border-radius: 12px;
   border: 2px solid #fff;
   box-shadow: 2px 2px 4px #000;
-}
-.boton:hover {
-  color: #fff;
-  background: #3c9;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   transition: background 0.5s, color 0.5s;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: #3c9;
+}
+
+.boton img {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  object-fit: cover;
 }

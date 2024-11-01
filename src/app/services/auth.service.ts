@@ -184,6 +184,7 @@ export class AuthService {
           imagenUno: resultado,
           estaValidado: false,
           rol: 'especialista',
+          //params
         };
         await addDoc(this._collection, data).then(() => {
           retorno = true;

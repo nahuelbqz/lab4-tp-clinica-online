@@ -33,6 +33,13 @@ export class LoginComponent implements OnInit {
   flag: boolean = false;
   captcha: string = '';
 
+  imgUsuario1?: string;
+  imgUsuario2?: string;
+  imgUsuario3?: string;
+  imgUsuario4?: string;
+  imgUsuario5?: string;
+  imgUsuario6?: string;
+
   formLogin = this.fb.nonNullable.group({
     email: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -45,6 +52,7 @@ export class LoginComponent implements OnInit {
       this.spinner = false;
     }, 1500);
 
+    this.obtenerImgUsuario(); // imagenes usuarios acceso rapido
     this.captcha = this.generarCaptcha(6); //CREA CAPTCHA
   }
 
@@ -174,5 +182,26 @@ export class LoginComponent implements OnInit {
     }
 
     this.toastService.info('Usurario cargado', 'Login info');
+  }
+
+  obtenerImgUsuario() {
+    this.authService.getUsuario('cifasi8066@abatido.com').then((r) => {
+      this.imgUsuario1 = r.imagenUno;
+    });
+    this.authService.getUsuario('9rgymr8nlw@smykwb.com').then((r) => {
+      this.imgUsuario2 = r.imagenUno;
+    });
+    this.authService.getUsuario('yojec36413@bulatox.com').then((r) => {
+      this.imgUsuario3 = r.imagenUno;
+    });
+    this.authService.getUsuario('nexar25753@aleitar.com').then((r) => {
+      this.imgUsuario4 = r.imagenUno;
+    });
+    this.authService.getUsuario('pawan69453@aleitar.com').then((r) => {
+      this.imgUsuario5 = r.imagenUno;
+    });
+    this.authService.getUsuario('admin@admin.com').then((r) => {
+      this.imgUsuario6 = r.imagenUno;
+    });
   }
 }
