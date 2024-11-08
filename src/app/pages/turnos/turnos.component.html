@@ -1,0 +1,46 @@
+@if (spinner) {
+<div class="contenedor-spinner">
+    <div class="loader"></div>
+</div>
+}
+
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="container containerBackground">
+        <h1>Turnos</h1>
+        <!-- Input Buscar -->
+        @if(authService.currentUserSig()?.rol == 'admin') {
+        <div class="input-group mb-3 mt-3">
+            <input [(ngModel)]="buscarString" type="text" class="form-control"
+                placeholder="Buscar por Especialista o Especialidad" aria-label="Buscar" />
+            <button class="btn-buscar" type="button" (click)="onBuscar()">Buscar</button>
+        </div>
+
+        <!-- Lista de Turnos -->
+        <div class="row">
+            @for (turno of listaTurnosPacientesFiltrado; track turno.id) {
+            <div class="col-12 col-md-6 d-flex justify-content-center mb-3">
+                <div class="card turno-card" style="width: 100%">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item fw-bold">Estado: {{ turno.estado }}</li>
+                        <li class="list-group-item">Fecha: {{ turno.date }}</li>
+                        <li class="list-group-item">Horario: {{ turno.time }}</li>
+                        <li class="list-group-item">Paciente: {{ turno.paciente }}</li>
+                        <li class="list-group-item">Especialista: {{ turno.especialista }}</li>
+                        <li class="list-group-item">Especialidad: {{ turno.especialidad }}</li>
+                    </ul>
+                    <div class="card-footer">
+                        <div class="row">
+                            @if(authService.currentUserSig()?.rol == 'admin' && turno.estado == "pendiente") {
+                            <div class="col">
+                                <a (click)="adminCancelarTurno(turno)" class="btn btn-boton">Cancelar Turno</a>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+    </div>
+</div>

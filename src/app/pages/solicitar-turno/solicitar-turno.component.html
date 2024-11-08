@@ -1,0 +1,101 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+  <div class="container">
+    <!-- Especialidades -->
+    <h2 class="h2 fw-bold mb-4">Especialidades</h2>
+    <div class="row">
+      @for (especialidad of arrayEspecialidades; track $index) {
+      <div class="col">
+        <button class="btn-boton m-1" (click)="clickEspecialidad(especialidad.nombre)">
+          {{especialidad.nombre}}
+        </button>
+      </div>
+      }
+    </div>
+    <!-- Especialistas -->
+    @if(especialidadString){
+    <h2 class="h2 fw-bold mb-4">Especialistas</h2>
+    <div class="row row-cols-auto gap-2 justify-content-center">
+      @for (usuario of usuariosEspecialistasFiltrado; track $index) {
+      <div class="col">
+        <div class="contenedorEspecialistas">
+          <button class="btn-boton m-1" (click)="clickEspecialista(usuario)">
+            {{usuario.nombre}} {{ usuario.apellido }}
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+    <!-- Lista Pacientes -->
+    @if(this.authService.currentUserSig()?.rol == "admin" && especialistaElegido){
+    <h2 class="h2 fw-bold mb-4">Pacientes</h2>
+    <div class="table-responsive">
+      <table class="table table-hover table-borderless transparent-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>DNI</th>
+            <th>Obra Social</th>
+            <th>Mail</th>
+            <th>Imagen</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of usuariosPacientes; track usuario.id) {
+          <tr>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellido }}</td>
+            <td>{{ usuario.edad }}</td>
+            <td>{{ usuario.dni }}</td>
+            <td>{{ usuario.obraSocial }}</td>
+            <td>{{ usuario.mail }}</td>
+            <td><img width="50px" [src]="usuario.imagenUno" alt="" /></td>
+            <td>
+              <button type="button" (click)="clickPaciente(usuario)" class="btn-boton">
+                {{ pacienteElegido == usuario.mail ? "Seleccionado" : "Seleccionar" }}
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+
+    <!-- Lista Turnos (select) -->
+    @if(especialistaElegido){
+    <div class="turnos">
+      <h2 class="h2 fw-bold mb-4">Turnos Disponibles</h2>
+      @if(especialistaElegido){
+      <!-- Dias -->
+      @for (day of futureDays; track $index) {
+      <button (click)="onDayClick(day.date)" class="btn-boton-small m-1"
+        [ngClass]="{ 'btn-info': day.date == this.selectedDay?.date }">
+        {{ day.date }}
+      </button>
+      }
+      <!-- Horarios -->
+      @if(selectedDay){
+      <div class="mt-1 mb-1">
+        @for (button of selectedDay.buttons; track $index) {
+        <button class="btn-boton-small m-1" [ngClass]="{ 'btn-info': button.selected }"
+          (click)="onHourClick(selectedDay.date, button.time)">
+          {{ button.time | hourFormatPipe }}
+        </button>
+        }
+      </div>
+      } }
+    </div>
+    }
+    <!-- Botón Reservar centrado -->
+    <div class="d-flex justify-content-center mt-4">
+      <button class="btn-boton m-1" (click)="reservar()">
+        Reservar Turno
+      </button>
+    </div>
+  </div>
+</div>

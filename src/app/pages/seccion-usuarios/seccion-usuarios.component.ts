@@ -53,7 +53,11 @@ export class SeccionUsuariosComponent {
       imagenUno: especialista.imagenUno,
       rol: especialista.rol,
       estaValidado: estaValidadoAux,
-      //params
+      deSemana: especialista.deSemana,
+      hastaSemana: especialista.hastaSemana,
+      deSabado: especialista.deSabado,
+      hastaSabado: especialista.hastaSabado,
+      usuariosAtentidos: especialista.usuariosAtentidos,
     };
     this.authService.updateUsuarioEspecialista(
       especialista.id,

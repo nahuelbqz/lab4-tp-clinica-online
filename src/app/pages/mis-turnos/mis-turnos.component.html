@@ -1,0 +1,70 @@
+@if (spinner) {
+<div class="contenedor-spinner">
+    <div class="loader"></div>
+</div>
+}
+
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="container">
+        <h1>Mis turnos</h1>
+
+        <!-- Buscar Turno -->
+        @if(authService.currentUserSig()?.rol == 'paciente' || authService.currentUserSig()?.rol == 'especialista') {
+        <div class="input-group mb-3 mt-3">
+            <input [(ngModel)]="buscarString" type="text" class="form-control"
+                placeholder="Buscar por Especialista o Especialidad" aria-label="Buscar" />
+            <button class="btn-buscar" (click)="onBuscar()">Buscar</button>
+        </div>
+
+        <!-- Lista de Turnos -->
+        <div class="row">
+            @for (turno of listaTurnosPacientesFiltrado; track turno.id) {
+            <div class="col-12 col-md-6 d-flex justify-content-center mb-3">
+                <div class="card turno-card" style="width: 100%">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item fw-bold">Estado: {{ turno.estado }}</li>
+                        <li class="list-group-item">Fecha: {{ turno.date }}</li>
+                        <li class="list-group-item">Horario: {{ turno.time }}</li>
+                        <li class="list-group-item">Paciente: {{ turno.paciente }}</li>
+                        <li class="list-group-item">Especialista: {{ turno.especialista }}</li>
+                        <li class="list-group-item">Especialidad: {{ turno.especialidad }}</li>
+                    </ul>
+                    <div class="card-footer">
+                        <div class="row">
+                            @if(authService.currentUserSig()?.rol == 'paciente' && (turno.estado == "pendiente" ||
+                            turno.estado == "aceptado")) {
+                            <div class="col"><a (click)="pacienteCancelarTurno(turno)" class="btn btn-boton">Cancelar
+                                    Turno</a></div>
+                            }
+                            @if(authService.currentUserSig()?.rol == 'paciente' && turno.comentarioEspecialista != "") {
+                            <div class="col"><a (click)="pacienteVerResena(turno)" class="btn btn-boton">Ver
+                                    Reseña</a></div>
+                            }
+                            @if(authService.currentUserSig()?.rol == 'paciente' && turno.estado == "realizado") {
+                            <div class="col"><a (click)="pacienteCompletarEncuesta(turno)"
+                                    class="btn btn-boton">Completar Encuesta</a></div>
+                            <div class="col"><a (click)="pacienteCalificarAtencion(turno)"
+                                    class="btn btn-boton">Calificar Atención</a></div>
+                            }
+                            @if(authService.currentUserSig()?.rol == 'especialista') {
+                            <div class="col">
+                                <a *ngIf="turno.estado == 'pendiente'" (click)="especialistaRechazarTruno(turno)"
+                                    class="btn btn-boton">Rechazar</a>
+                                <a *ngIf="turno.estado == 'pendiente'" (click)="especialistaAceptarTurno(turno)"
+                                    class="btn btn-boton">Aceptar</a>
+                                <a *ngIf="turno.estado == 'aceptado'" (click)="especialistaFinalizarTurno(turno)"
+                                    class="btn btn-boton">Finalizar Turno</a>
+                                <a *ngIf="turno.estado == 'pendiente' || turno.estado == 'aceptado'"
+                                    (click)="especialistaCancelarTurno(turno)" class="btn btn-boton">Cancelar
+                                    Turno</a>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+    </div>
+</div>

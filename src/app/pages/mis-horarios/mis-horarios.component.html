@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="container d-flex align-items-center">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <h2 class="fw-bold text-white">Horarios de semana:</h2>
+            <div class="row">
+                <div class="col">
+                    <h3>Desde:</h3>
+                    <select formControlName="deSemana" class="form-select mb-3" aria-label="Select start time">
+                        <option *ngFor="let hour of weekHours" [value]="hour">{{ hour }}:00</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <h3>Hasta:</h3>
+                    <select formControlName="hastaSemana" class="form-select mb-3" aria-label="Select end time">
+                        <option *ngFor="let hour of weekHours" [value]="hour">{{ hour }}:00</option>
+                    </select>
+                </div>
+            </div>
+            <h2 class="fw-bold text-white">Horarios de sabado:</h2>
+            <div class="row">
+                <div class="col">
+                    <h3>Desde:</h3>
+                    <select formControlName="deSabado" class="form-select mb-3" aria-label="Select start time">
+                        <option *ngFor="let hour of saturdayHours" [value]="hour">{{ hour }}:00</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <h3>Hasta:</h3>
+                    <select formControlName="hastaSabado" class="form-select mb-3" aria-label="Select end time">
+                        <option *ngFor="let hour of saturdayHours" [value]="hour">{{ hour }}:00</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success text-white mt-4 w-100">
+                Guardar horarios
+            </button>
+        </form>
+    </div>
+</div>

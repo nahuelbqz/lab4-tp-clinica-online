@@ -14,6 +14,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'home',
+    redirectTo: 'bienvenida',
+    pathMatch: 'full',
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./pages/login/login.component').then((m) => m.LoginComponent),
@@ -60,13 +65,39 @@ export const routes: Routes = [
         (m) => m.SeccionUsuariosComponent
       ),
   },
-  // {
-  //   path: 'mis-turnos',
-  //   loadComponent: () =>
-  //     import('./pages/mis-turnos/mis-turnos.component').then(
-  //       (m) => m.MisTurnosComponent
-  //     ),
-  // },
+  {
+    path: 'mis-turnos',
+    loadComponent: () =>
+      import('./pages/mis-turnos/mis-turnos.component').then(
+        (m) => m.MisTurnosComponent
+      ),
+  },
+  {
+    path: 'turnos',
+    loadComponent: () =>
+      import('./pages/turnos/turnos.component').then((m) => m.TurnosComponent),
+  },
+  {
+    path: 'solicitar-turno',
+    loadComponent: () =>
+      import('./pages/solicitar-turno/solicitar-turno.component').then(
+        (m) => m.SolicitarTurnoComponent
+      ),
+  },
+  {
+    path: 'mi-perfil',
+    loadComponent: () =>
+      import('./pages/mi-perfil/mi-perfil.component').then(
+        (m) => m.MiPerfilComponent
+      ),
+  },
+  {
+    path: 'mis-horarios',
+    loadComponent: () =>
+      import('./pages/mis-horarios/mis-horarios.component').then(
+        (m) => m.MisHorariosComponent
+      ),
+  },
   {
     path: 'error',
     loadComponent: () =>

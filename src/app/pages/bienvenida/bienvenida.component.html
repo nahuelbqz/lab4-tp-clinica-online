@@ -11,16 +11,18 @@
         <h1>BIENVENIDO</h1>
         <h3>
           TRABAJO PRÁCTICO N°2
-          <br/>
+          <br />
           CLINICA ONLINE
-          <br/>
+          <br />
           Nahuel Borquez
         </h3>
 
+        @if(!authService.currentUserSig()){
         <div class="containter-btn">
           <button class="btn-boton" routerLink="/login">LOGIN</button>
           <button class="btn-boton" routerLink="/registro">REGISTRO</button>
         </div>
+        }
       </div>
 
       <div class="col col-img">

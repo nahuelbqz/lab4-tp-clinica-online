@@ -184,7 +184,11 @@ export class AuthService {
           imagenUno: resultado,
           estaValidado: false,
           rol: 'especialista',
-          //params
+          deSemana: 8,
+          hastaSemana: 19,
+          deSabado: 8,
+          hastaSabado: 14,
+          usuariosAtentidos: [],
         };
         await addDoc(this._collection, data).then(() => {
           retorno = true;

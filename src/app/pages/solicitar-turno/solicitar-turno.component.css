@@ -1,0 +1,90 @@
+.min-100vh {
+  min-height: 100vh;
+  background-image: url("../../../../public/assets/hospital-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 30px;
+  border: 2px solid #7c9;
+  padding: 35px;
+  width: 70rem; /* Ajusta según sea necesario */
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedorEspecialistas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5px; /* Espacio adicional para los bordes */
+}
+
+/* BOTON */
+.btn-boton {
+  border-radius: 10px;
+  height: 70px;
+  width: 160px;
+  border: 3px solid #000;
+  background-color: #7c9;
+  font-weight: bold;
+}
+.btn-boton:hover {
+  color: #fff;
+  background: #3c9;
+  cursor: pointer;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* Botones de Días y Horas */
+.btn-boton-small {
+  border-radius: 8px;
+  height: 50px; /* Reducido de 70px */
+  width: 120px; /* Reducido de 160px */
+  border: 2px solid #000;
+  background-color: #7c9;
+  font-weight: bold;
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+}
+.btn-boton-small:hover {
+  color: #fff;
+  background: #3c9;
+  cursor: pointer;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* TABLA */
+.transparent-table {
+  background-color: transparent; /* Transparencia total */
+  border-collapse: collapse;
+}
+
+.transparent-table thead {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.1
+  ); /* Opcional: cabeza de tabla semitransparente */
+}
+
+.transparent-table th,
+.transparent-table td {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Fondo de celdas semitransparente */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Bordes semitransparentes */
+  padding: 8px;
+  color: #fff; /* Texto blanco para contraste */
+}
+
+.transparent-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05); /* Color de fondo en hover */
+}
