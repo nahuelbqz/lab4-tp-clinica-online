@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { EspecialistaInterface } from '../../interfaces/especialista';
 import { turnoInterface, turnoInterfaceId } from '../../interfaces/turno';
-import { HistorialClinicaService } from '../../services/historial-clinica.service';
+import { HistoriaClinicaService } from '../../services/historia-clinica.service';
 import { TurnosService } from '../../services/turnos.service';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +20,7 @@ import { NgIf } from '@angular/common';
 export class MisTurnosComponent {
   authService = inject(AuthService);
   turnosService = inject(TurnosService);
-  historialService = inject(HistorialClinicaService);
+  historialService = inject(HistoriaClinicaService);
   toastAlert = inject(ToastrService);
   router = inject(Router);
   spinner: boolean = false;
@@ -63,9 +63,27 @@ export class MisTurnosComponent {
       // Agregar filtro historial
       this.listaTurnosPacientes.forEach(async (turno) => {
         let esValido: boolean = false;
+        const historialTurno =
+          await this.historialService.getHistoriaClinicaIdTurno(turno.id);
+        if (historialTurno) {
+          if (
+            historialTurno.altura == term ||
+            historialTurno.peso == term ||
+            historialTurno.temperatura == term ||
+            historialTurno.precion == term ||
+            historialTurno.arrayObservaciones[1]?.toLowerCase() == term ||
+            historialTurno.arrayObservaciones[3]?.toLowerCase() == term ||
+            historialTurno.arrayObservaciones[5]?.toLowerCase() == term
+          ) {
+            esValido = true;
+          }
+        }
         if (
           turno.especialidad?.toLowerCase().includes(term) ||
           turno.especialista?.toLowerCase().includes(term) ||
+          turno.date?.toLowerCase().includes(term) ||
+          turno.estado?.toLowerCase().includes(term) ||
+          turno.time?.toLowerCase().includes(term) ||
           turno.paciente?.toLowerCase().includes(term)
         ) {
           esValido = true;
@@ -292,7 +310,7 @@ export class MisTurnosComponent {
           result.value,
           turno
         );
-        this.router.navigateByUrl('/historial-clinica');
+        this.router.navigateByUrl('/cargar-historia-clinica');
       }
     });
   }

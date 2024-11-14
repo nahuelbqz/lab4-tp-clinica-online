@@ -9,13 +9,12 @@ import { EspecialidadService } from '../../services/especialidad.service';
 import { TurnosService } from '../../services/turnos.service';
 import { AuthService } from '../../services/auth.service';
 import { EspecialidadInterfaceId } from '../../interfaces/especialidad';
-import { NgClass } from '@angular/common';
 import { hourFormatPipe } from '../../pipes/hour-format.pipe';
 
 @Component({
   selector: 'app-solicitar-turno',
   standalone: true,
-  imports: [FormsModule, NgClass, hourFormatPipe],
+  imports: [FormsModule, hourFormatPipe],
   templateUrl: './solicitar-turno.component.html',
   styleUrl: './solicitar-turno.component.css',
 })
@@ -52,6 +51,8 @@ export class SolicitarTurnoComponent {
   pacienteElegido?: string;
   especialidadString?: string;
 
+  especialidadesFiltradas: EspecialidadInterfaceId[] = []; // Nueva variable para almacenar especialidades filtradas por especialista
+
   ngOnInit() {
     this.especialidadService.getEspecialidad().subscribe((data) => {
       this.arrayEspecialidades = data;
@@ -69,23 +70,26 @@ export class SolicitarTurnoComponent {
     });
   }
 
+  // Método actualizado
+  clickEspecialista(usuario: EspecialistaInterfaceId) {
+    this.especialistaElegido = usuario.mail;
+    // Filtra especialidades basadas en las especialidades del especialista seleccionado
+    this.especialidadesFiltradas =
+      this.arrayEspecialidades?.filter((especialidad) =>
+        usuario.especialidad.includes(especialidad.nombre)
+      ) || [];
+    this.calculateFutureDays(usuario);
+    console.log('Especialista seleccionado:', usuario);
+  }
+
+  // Método clickEspecialidad actualizado
   clickEspecialidad(nombreEspecialidad: string) {
     if (nombreEspecialidad) {
       this.especialidadString = nombreEspecialidad;
-
-      this.usuariosEspecialistasFiltrado = this.usuariosEspecialistas.filter(
-        (usuario) => usuario.especialidad.includes(nombreEspecialidad)
-      );
-      this.especialidadElegida = nombreEspecialidad; // le asigno la especialidad elegida
+      this.especialidadElegida = nombreEspecialidad; // Se asigna la especialidad elegida
+      this.filtrarTurnosPorEspecialista(this.especialistaElegido);
+      console.log('Especialidad seleccionada:', nombreEspecialidad);
     }
-  }
-
-  clickEspecialista(usuario: any) {
-    this.especialistaElegido = usuario.mail;
-    // this.especialidadElegida = usuario.especialidad; //array de especialidades
-    this.filtrarTurnosPorEspecialista(this.especialistaElegido);
-    this.calculateFutureDays(usuario);
-    console.log(usuario);
   }
   clickPaciente(usuario: any) {
     this.pacienteElegido = usuario.mail;
@@ -128,7 +132,7 @@ export class SolicitarTurnoComponent {
       const buttons = this.generateButtons(futureDate, usuario);
 
       this.futureDays.push({
-        date: this.formatDate(futureDate),
+        date: this.formatDate(futureDate), // Usa el nuevo formato aquí
         day: dayOfWeek,
         buttons: buttons,
       });
@@ -172,29 +176,29 @@ export class SolicitarTurnoComponent {
     minute: number
   ): void {
     const time = this.formatTime(hour, minute);
-    const formattedDate = this.formatDate(date);
-    const slot = { date: formattedDate, time: time };
+    const formattedDate = this.formatDate(date); // Asegúrate de usar el formato completo
 
     if (
       !this.turnosFiltrados.some(
-        (turnos) => turnos.date == slot.date && turnos.time == slot.time
+        (turnos) => turnos.date == formattedDate && turnos.time == time
       )
     ) {
       buttons.push({ time: time, selected: false });
     }
   }
+
   formatDate(date: Date): string {
-    const day =
-      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    const year = date.getFullYear();
     const month =
       date.getMonth() + 1 < 10
         ? `0${date.getMonth() + 1}`
         : `${date.getMonth() + 1}`;
+    const day =
+      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
 
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
+    return `${year}-${month}-${day}`;
   }
+
   formatTime(hour: number, minute: number): string {
     const hourStr = hour < 10 ? `0${hour}` : `${hour}`;
     const minuteStr = minute < 10 ? `0${minute}` : `${minute}`;

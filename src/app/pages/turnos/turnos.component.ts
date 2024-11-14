@@ -22,6 +22,7 @@ export class TurnosComponent {
   listaTurnosPacientesFiltrado: turnoInterfaceId[] = [];
   buscarString: string = '';
   spinner: boolean = false;
+
   ngOnInit(): void {
     this.spinner = true;
     setTimeout(() => {
@@ -48,7 +49,7 @@ export class TurnosComponent {
   // Botones
   adminCancelarTurno(turno: turnoInterfaceId) {
     Swal.fire({
-      title: 'Mensaje de cancelacion',
+      title: 'Motivo de cancelacion',
       input: 'text',
       inputAttributes: {
         autocapitalize: 'off',

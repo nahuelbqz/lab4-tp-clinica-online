@@ -99,6 +99,20 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'historia-clinica',
+    loadComponent: () =>
+      import('./pages/historia-clinica/historia-clinica.component').then(
+        (m) => m.HistoriaClinicaComponent
+      ),
+  },
+  {
+    path: 'cargar-historia-clinica',
+    loadComponent: () =>
+      import(
+        './pages/cargar-historia-clinica/cargar-historia-clinica.component'
+      ).then((m) => m.CargarHistoriaClinicaComponent),
+  },
+  {
     path: 'error',
     loadComponent: () =>
       import('./pages/error/error.component').then((m) => m.ErrorComponent),

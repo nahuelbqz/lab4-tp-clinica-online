@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="container">
+        <h2>Cargar Historia Clínica</h2>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- Altura -->
+            <div class="form-group">
+                <label for="altura" class="form-label fw-bold">Altura</label>
+                <input formControlName="altura" id="altura" class="form-control bg-light" type="number"
+                    placeholder="Ingrese la altura del paciente" />
+                @if(form.get('altura'); as aux){ @if(aux.invalid && (aux.dirty ||
+                aux.touched)){
+                <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+                    {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+                </div>
+                } }
+            </div>
+            <!-- Peso -->
+            <div class="form-group mt-3">
+                <label for="peso" class="form-label fw-bold">Peso</label>
+                <input formControlName="peso" id="peso" class="form-control bg-light" type="number"
+                    placeholder="Ingrese el peso del paciente" />
+                @if(form.get('peso'); as aux){ @if(aux.invalid && (aux.dirty ||
+                aux.touched)){
+                <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+                    {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+                </div>
+                } }
+            </div>
+            <!-- Temperatura -->
+            <div class="form-group mt-3">
+                <label for="temperatura" class="form-label fw-bold">Temperatura</label>
+                <input formControlName="temperatura" id="temperatura" class="form-control bg-light" type="number"
+                    placeholder="Ingrese la temperatura del paciente" />
+                @if(form.get('temperatura'); as aux){ @if(aux.invalid && (aux.dirty ||
+                aux.touched)){
+                <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+                    {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+                </div>
+                } }
+            </div>
+            <!-- Presión -->
+            <div class="form-group mt-3">
+                <label for="presion" class="form-label fw-bold">Presión</label>
+                <input formControlName="presion" id="presion" class="form-control bg-light" type="number"
+                    placeholder="Ingrese la presión del paciente" />
+                @if(form.get('presion'); as aux){ @if(aux.invalid && (aux.dirty ||
+                aux.touched)){
+                <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+                    {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+                </div>
+                } }
+            </div>
+
+            <!-- Observaciones -->
+            <label class="form-label fw-bold mt-3">Otras observaciones (opcional)</label>
+            <!-- Observación 1 -->
+            <div class="input-group mt-1">
+                <input formControlName="clave1" class="form-control bg-light" type="text" placeholder="Clave" />
+                <input formControlName="valor1" class="form-control bg-light" type="text" placeholder="Valor" />
+            </div>
+
+            <!-- Observación 2 -->
+            <div class="input-group mt-1">
+                <input formControlName="clave2" class="form-control bg-light" type="text" placeholder="Clave" />
+                <input formControlName="valor2" class="form-control bg-light" type="text" placeholder="Valor" />
+            </div>
+
+            <!-- Observación 3 -->
+            <div class="input-group mt-1">
+                <input formControlName="clave3" class="form-control bg-light" type="text" placeholder="Clave" />
+                <input formControlName="valor3" class="form-control bg-light" type="text" placeholder="Valor" />
+            </div>
+
+            <!-- Botón -->
+            <button [disabled]="!isFormValid" type="submit"
+                class="btn colorMain text-white w-100 mt-4 fw-semibold shadow-sm">
+                Finalizar Turno
+            </button>
+        </form>
+    </div>
+</div>

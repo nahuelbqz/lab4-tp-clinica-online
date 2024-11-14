@@ -4,15 +4,17 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .container {
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   border-radius: 30px;
   border: 2px solid #7c9;
   padding: 35px;
-  width: 70rem; /* Ajusta según sea necesario */
+  width: 70rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .contenedorEspecialistas {
@@ -21,17 +23,25 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 5px; /* Espacio adicional para los bordes */
+  padding: 10px;
 }
 
-/* BOTON */
 .btn-boton {
   border-radius: 10px;
   height: 70px;
-  width: 160px;
+  width: 155px;
   border: 3px solid #000;
   background-color: #7c9;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.btn-boton img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
 }
 .btn-boton:hover {
   color: #fff;
@@ -40,17 +50,60 @@
   transition: background 0.5s, color 0.5s;
 }
 
-/* Botones de Días y Horas */
-.btn-boton-small {
+.btn-especialista {
+  border-radius: 8px; /* Bordes cuadrados */
+  height: 100px; /* Ajusta el tamaño según sea necesario */
+  width: 100px;
+  border: 3px solid #000;
+  background-color: #7c9;
+  font-weight: bold;
+}
+.btn-especialista:hover {
+  color: #fff;
+  background: #3c9;
+  cursor: pointer;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* Botones de Especialidades */
+.row-cols-auto {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-boton-dias {
   border-radius: 8px;
-  height: 50px; /* Reducido de 70px */
-  width: 120px; /* Reducido de 160px */
+  height: 50px;
+  width: 110px;
+  border: 3px solid #000;
+  background-color: #7c9;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-boton-dias:hover {
+  color: #fff;
+  background: #3c9;
+  cursor: pointer;
+  transition: background 0.5s, color 0.5s;
+}
+.btn-boton-horas {
+  border-radius: 8px;
+  height: 60px;
+  width: 60px;
   border: 2px solid #000;
   background-color: #7c9;
   font-weight: bold;
-  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  font-size: 0.9rem;
 }
-.btn-boton-small:hover {
+.btn-boton-horas:hover {
   color: #fff;
   background: #3c9;
   cursor: pointer;
@@ -59,32 +112,22 @@
 
 /* TABLA */
 .transparent-table {
-  background-color: transparent; /* Transparencia total */
+  background-color: transparent;
   border-collapse: collapse;
 }
 
 .transparent-table thead {
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.1
-  ); /* Opcional: cabeza de tabla semitransparente */
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .transparent-table th,
 .transparent-table td {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ); /* Fondo de celdas semitransparente */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Bordes semitransparentes */
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 8px;
-  color: #fff; /* Texto blanco para contraste */
+  color: #fff;
 }
 
 .transparent-table tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.05); /* Color de fondo en hover */
+  background-color: rgba(255, 255, 255, 0.05);
 }

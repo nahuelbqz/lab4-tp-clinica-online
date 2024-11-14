@@ -16,7 +16,7 @@
     } @if(authService.currentUserSig()?.rol == "admin"){
     <a routerLink="/turnos">Turnos</a>
     } @if(authService.currentUserSig()?.rol == "especialista"){
-    <a routerLink="/ver-historial-clinica">Pacientes</a>
+    <a routerLink="/historia-clinica">Pacientes</a>
     } @if(authService.currentUserSig() != null){
     <a routerLink="/mi-perfil">Mi Perfil</a>
     }

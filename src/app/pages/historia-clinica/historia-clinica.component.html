@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="container">
+        <h1>Historia clinica</h1>
+
+        <!-- Lista Historia Clínica Pacientes -->
+        @if(authService.currentUserSig()?.rol === 'admin' ||
+        authService.currentUserSig()?.rol === 'especialista' ||
+        authService.currentUserSig()?.rol === 'paciente') {
+
+        <div class="row">
+            @for (historial of listaHistorial; track historial.id){
+            <div class="col-md-6 col-sm-12 mt-3">
+                <div class="card" style="width: 100%">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            Paciente: {{ historial.mailPaciente }}
+                        </li>
+                        <li class="list-group-item">
+                            Especialidad: {{ historial.especialidad }}
+                        </li>
+                        <li class="list-group-item">
+                            Temperatura: {{ historial.temperatura }}
+                        </li>
+                        <li class="list-group-item">Peso: {{ historial.peso }}</li>
+                        <li class="list-group-item">Presion: {{ historial.presion }}</li>
+                        <li class="list-group-item">Altura: {{ historial.altura }}</li>
+                        <li class="list-group-item">
+                            {{ historial.arrayObservaciones[0] }}:
+                            {{ historial.arrayObservaciones[1] }}
+                        </li>
+                        <li class="list-group-item">
+                            {{ historial.arrayObservaciones[2] }}:
+                            {{ historial.arrayObservaciones[3] }}
+                        </li>
+                        <li class="list-group-item">
+                            {{ historial.arrayObservaciones[4] }}:
+                            {{ historial.arrayObservaciones[5] }}
+                        </li>
+                    </ul>
+                    <div class="card-footer d-flex justify-content-center">
+                        <button (click)="descargarPDF(historial)" class="btn btn-success m-1">
+                            Descargar PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- todos pdf y ult turno -->
+        }
+    </div>
+</div>
