@@ -6,7 +6,7 @@
       @for (usuario of usuariosEspecialistas; track $index) {
       <div class="col">
         <div class="contenedorEspecialistas">
-          <button class="btn-especialista m-1" (click)="clickEspecialista(usuario)">
+          <button class="btn-cuadrado m-1" (click)="clickEspecialista(usuario)">
             <img [src]="usuario.imagenUno" alt="" width="80px" height="80px" />
           </button>
           <span class="fw-bold">{{ usuario.nombre }} {{ usuario.apellido }}</span>
@@ -22,9 +22,12 @@
       <!-- Listado de especialidades filtradas según el especialista seleccionado -->
       @for (especialidad of especialidadesFiltradas; track $index) {
       <div class="col">
-        <button class="btn-boton m-1" (click)="clickEspecialidad(especialidad.nombre)">
-          {{ especialidad.nombre }}
-        </button>
+        <div class="contenedorEspecialistas">
+          <span class="fw-bold">{{ especialidad.nombre }}</span>
+          <button class="btn-cuadrado m-1" (click)="clickEspecialidad(especialidad.nombre)">
+            <img src="/assets/especialista.png" alt="" width="80px" height="80px">
+          </button>
+        </div>
       </div>
       }
     </div>
@@ -69,31 +72,23 @@
     </div>
     }
 
-    <!-- Lista Turnos (select) -->
-    @if(especialidadElegida){
+    <!-- Dia y hora -->
+    @if (especialidadElegida) {
     <div class="turnos">
       <h2 class="h2 fw-bold mb-4">Turnos Disponibles</h2>
-      @if(especialidadElegida){
-      <!-- Dias -->
       <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <!-- hacer boton para ver mas.. -->
         @for (day of futureDays; track $index) {
-        <button (click)="onDayClick(day.date)" class="btn-boton-dias m-1">
-          {{ day.date }}
+        @for (button of day.buttons; track $index) {
+        <button (click)="onDayAndHourClick(day.date, button.time)" class="btn-boton-dias m-1">
+          {{ day.date }} - {{ button.time | hourFormatPipe }}
         </button>
         }
-      </div>
-      <!-- Horarios -->
-      @if(selectedDay){
-      <div class="mt-1 mb-1">
-        @for (button of selectedDay.buttons; track $index) {
-        <button class="btn-boton-horas m-1" (click)="onHourClick(selectedDay.date, button.time)">
-          {{ button.time | hourFormatPipe }}
-        </button>
         }
       </div>
-      } }
     </div>
     }
+
     <!-- Botón Reservar centrado -->
     <div class="d-flex justify-content-center mt-4">
       <button class="btn-boton m-1" (click)="reservar()">

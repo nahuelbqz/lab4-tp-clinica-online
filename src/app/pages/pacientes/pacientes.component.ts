@@ -1,27 +1,22 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import jsPDF from 'jspdf';
+import { EspecialidadInterfaceId } from '../../interfaces/especialidad';
+import { HistoriaClinicaInterfaceId } from '../../interfaces/historia-clinica';
+import { turnoInterfaceId } from '../../interfaces/turno';
+import { AuthService } from '../../services/auth.service';
 import { EspecialidadService } from '../../services/especialidad.service';
 import { HistoriaClinicaService } from '../../services/historia-clinica.service';
 import { TurnosService } from '../../services/turnos.service';
-import { AuthService } from '../../services/auth.service';
-import { EspecialidadInterfaceId } from '../../interfaces/especialidad';
-import { turnoInterfaceId } from '../../interfaces/turno';
-import jsPDF from 'jspdf';
-import { HistoriaClinicaInterfaceId } from '../../interfaces/historia-clinica';
 
 @Component({
-  selector: 'app-historia-clinica',
+  selector: 'app-pacientes',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
-  templateUrl: './historia-clinica.component.html',
-  styleUrl: './historia-clinica.component.css',
+  imports: [],
+  templateUrl: './pacientes.component.html',
+  styleUrl: './pacientes.component.css',
 })
-export class HistoriaClinicaComponent {
+export class PacientesComponent {
   authService = inject(AuthService);
   historialService = inject(HistoriaClinicaService);
   turnosService = inject(TurnosService);

@@ -21,7 +21,25 @@
         <input formControlName="password" class="form-control bg-light" type="password" placeholder="Password" />
       </div>
 
-      <button [disabled]="!formLogin.valid" type="submit" class="btn w-100 mt-4 fw-bold shadow-sm">
+      <!-- Captcha -->
+      <br />
+      <p class="captcha">
+        {{ captcha }}
+      </p>
+      <p class="fw-bold m-1 texto-blanco">Ingrese los caracteres de arriba</p>
+      <div class="input-group mt-1">
+        <div class="input-group-text">
+          <img src="/assets/recaptcha.png" alt="captcha-icon" style="height: 1rem" />
+        </div>
+        <input formControlName="captcha" type="text" class="form-control bg-light" placeholder="Captcha" />
+      </div>
+      @if(formLogin.get('captcha'); as aux){ @if(aux.invalid && (aux.dirty ||
+      aux.touched)){
+      <div class="alert hide alert-danger mt-0" role="alert" style="padding: 5px">
+        {{ aux.hasError("required") ? "Es requerido" : "Es invalido" }}
+      </div>
+      }}
+      <button [disabled]="!formLogin.valid" type="submit" class="btn w-100 mt-2 fw-bold shadow-sm">
         Iniciar sesión
       </button>
     </form>

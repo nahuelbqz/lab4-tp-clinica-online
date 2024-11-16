@@ -63,3 +63,15 @@
   height: 80%;
   border-radius: 50%;
 }
+.captcha {
+  text-align: center;
+  margin: 15px 0 2px 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background-color: #fff;
+  font-weight: bold;
+  color: #000;
+  font-size: 20px;
+}

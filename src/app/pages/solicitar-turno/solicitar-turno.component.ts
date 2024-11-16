@@ -236,6 +236,31 @@ export class SolicitarTurnoComponent {
     }
     this.turnosElegidos = [];
   }
+  onDayAndHourClick(dateBtn: string, timeBtn: string): void {
+    const day = this.futureDays.find((d) => d.date === dateBtn);
+
+    if (day) {
+      const button = day.buttons.find((btn) => btn.time === timeBtn);
+      if (button) {
+        button.selected = !button.selected;
+
+        if (button.selected) {
+          // Agregar el turno al array de turnosElegidos
+          this.turnosElegidos.push({ date: dateBtn, time: timeBtn });
+        } else {
+          // Quitar el turno del array de turnosElegidos
+          const index = this.turnosElegidos.findIndex(
+            (b) => b.time === timeBtn && b.date === dateBtn
+          );
+          if (index !== -1) {
+            this.turnosElegidos.splice(index, 1);
+          }
+        }
+      }
+    }
+
+    console.log(this.turnosElegidos);
+  }
 
   reservar() {
     if (this.especialistaElegido && this.especialidadElegida) {

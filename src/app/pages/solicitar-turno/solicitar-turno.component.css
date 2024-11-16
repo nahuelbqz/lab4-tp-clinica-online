@@ -50,7 +50,7 @@
   transition: background 0.5s, color 0.5s;
 }
 
-.btn-especialista {
+.btn-cuadrado {
   border-radius: 8px; /* Bordes cuadrados */
   height: 100px; /* Ajusta el tamaño según sea necesario */
   width: 100px;
@@ -58,7 +58,7 @@
   background-color: #7c9;
   font-weight: bold;
 }
-.btn-especialista:hover {
+.btn-cuadrado:hover {
   color: #fff;
   background: #3c9;
   cursor: pointer;
@@ -78,15 +78,12 @@
 }
 
 .btn-boton-dias {
-  border-radius: 8px;
-  height: 50px;
+  border-radius: 8px; 
+  height: 90px; 
   width: 110px;
   border: 3px solid #000;
   background-color: #7c9;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .btn-boton-dias:hover {
   color: #fff;

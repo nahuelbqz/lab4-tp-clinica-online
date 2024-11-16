@@ -113,6 +113,13 @@ export const routes: Routes = [
       ).then((m) => m.CargarHistoriaClinicaComponent),
   },
   {
+    path: 'pacientes',
+    loadComponent: () =>
+      import('./pages/pacientes/pacientes.component').then(
+        (m) => m.PacientesComponent
+      ),
+  },
+  {
     path: 'error',
     loadComponent: () =>
       import('./pages/error/error.component').then((m) => m.ErrorComponent),
