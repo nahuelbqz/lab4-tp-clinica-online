@@ -1,10 +1,11 @@
 .min-100vh {
   min-height: 100vh;
-  background: url("../../../../public/assets/hospital-background.jpg") no-repeat
-    center center/cover;
+  background-image: url("../../../../public/assets/hospital-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.containerBackground {
+.container {
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   border-radius: 30px;
@@ -55,14 +56,4 @@ h1 {
   background: #3c9;
   cursor: pointer;
   transition: background 0.5s, color 0.5s;
-}
-
-@media (max-width: 768px) {
-  .containerBackground {
-    width: 90%;
-  }
-
-  h1 {
-    font-size: 40px;
-  }
 }

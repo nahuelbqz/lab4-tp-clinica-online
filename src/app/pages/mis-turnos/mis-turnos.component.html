@@ -36,7 +36,8 @@
                             <div class="col"><a (click)="pacienteCancelarTurno(turno)" class="btn btn-boton">Cancelar
                                     Turno</a></div>
                             }
-                            @if(authService.currentUserSig()?.rol == 'paciente' && turno.comentarioEspecialista != "") {
+                            @if((authService.currentUserSig()?.rol == 'paciente' || authService.currentUserSig()?.rol ==
+                            'especialista') && turno.comentarioEspecialista != "") {
                             <div class="col"><a (click)="pacienteVerResena(turno)" class="btn btn-boton">Ver
                                     Reseña</a></div>
                             }

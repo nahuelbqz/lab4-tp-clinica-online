@@ -109,6 +109,7 @@ export class AuthService {
       return null;
     }
   }
+  
   updateUsuarioEspecialista(id: string, especialista: EspecialistaInterface) {
     return updateDoc(this.document(id), { ...especialista });
   }

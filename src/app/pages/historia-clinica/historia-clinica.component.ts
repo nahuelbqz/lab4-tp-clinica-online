@@ -13,6 +13,7 @@ import { EspecialidadInterfaceId } from '../../interfaces/especialidad';
 import { turnoInterfaceId } from '../../interfaces/turno';
 import jsPDF from 'jspdf';
 import { HistoriaClinicaInterfaceId } from '../../interfaces/historia-clinica';
+import { EspecialistaInterfaceId } from '../../interfaces/especialista';
 
 @Component({
   selector: 'app-historia-clinica',
@@ -29,12 +30,13 @@ export class HistoriaClinicaComponent {
   fb = inject(FormBuilder);
 
   arrayEspecialidades?: EspecialidadInterfaceId[];
+  arrayEspecialistas: EspecialistaInterfaceId[] = [];
 
   listaHistorial: HistoriaClinicaInterfaceId[] = [];
   listaTurnos: turnoInterfaceId[] = [];
 
   form = this.fb.nonNullable.group({
-    especialidad: ['', Validators.required],
+    especialista: ['', Validators.required],
   });
 
   ngOnInit(): void {
@@ -80,14 +82,35 @@ export class HistoriaClinicaComponent {
         }
       }
     }, 2000);
+
     this.especialidadService.getEspecialidad().subscribe((data) => {
       this.arrayEspecialidades = data;
     });
+
+    this.authService.getUsuarios().subscribe((data) => {
+      this.arrayEspecialistas = data.filter(
+        (usuario) => usuario.rol === 'especialista'
+      );
+    });
+  }
+
+  onSummitEspecialista() {
+    if (this.form.valid) {
+      const selectedEspecialista = this.form.getRawValue().especialista;
+      const listaFiltrada: HistoriaClinicaInterfaceId[] =
+        this.listaHistorial.filter(
+          (historial) => historial.mailEspecialistas === selectedEspecialista
+        );
+
+      listaFiltrada.forEach((historial) => {
+        this.descargarPDF(historial);
+      });
+    }
   }
 
   descargarPDF(historial: HistoriaClinicaInterfaceId) {
     const doc = new jsPDF();
-    doc.addImage('assets/hospital-logo-icons8.png', 'PNG', 10, 10, 30, 30); //logo
+    doc.addImage('assets/hospital-logo-icons8.png', 'PNG', 10, 10, 30, 30);
     doc.setFont('Courier');
     doc.setFontSize(50);
     doc.text('Clinica online', 45, 30);
@@ -97,9 +120,7 @@ export class HistoriaClinicaComponent {
 
     doc.setFontSize(25);
     doc.text(`Paciente: ${historial.mailPaciente}`, 10, 80);
-
-    doc.setFontSize(25);
-    doc.text(`Especialidad: ${historial.especialidad}`, 10, 90);
+    doc.text(`Especialista: ${historial.mailEspecialistas}`, 10, 90);
 
     doc.setFontSize(20);
     doc.text(`Altura: ${historial.altura}`, 10, 100);
@@ -121,21 +142,13 @@ export class HistoriaClinicaComponent {
       10,
       160
     );
-    doc.text(`Fecha: ${this.obtenerFechaActual()}`, 10, 190);
 
-    doc.save(`${historial.mailPaciente}_hitorial_clinica.pdf`);
+    doc.text(`${this.obtenerFechaActual()}`, 10, 190);
+    doc.save(`${historial.mailPaciente}_historial_clinica.pdf`);
   }
 
   obtenerFechaActual(): string {
     const fecha = new Date();
-
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-    const año = fecha.getFullYear();
-
-    const horas = String(fecha.getHours()).padStart(2, '0');
-    const minutos = String(fecha.getMinutes()).padStart(2, '0');
-
-    return `${dia}/${mes}/${año} ${horas}:${minutos}`;
+    return `${fecha.toLocaleDateString()} ${fecha.toLocaleTimeString()}`;
   }
 }

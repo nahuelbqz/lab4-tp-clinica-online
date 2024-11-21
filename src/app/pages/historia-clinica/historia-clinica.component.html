@@ -47,7 +47,23 @@
             }
         </div>
 
-        <!-- todos pdf y ult turno -->
+        <!-- Elegir profesional -->
+        <form [formGroup]="form" (ngSubmit)="onSummitEspecialista()">
+            <div class="selectEspecialista mt-3 mb-3">
+                <h2>Elegir especialista</h2>
+                <select formControlName="especialista" class="form-select mt-3 mb-3"
+                    aria-label="Default select example">
+                    @for (especialista of arrayEspecialistas; track $index) {
+                    <option [value]="especialista.mail">
+                        {{ especialista.nombre }} - {{ especialista.apellido }} - {{ especialista.mail }}
+                    </option>
+                    }
+                </select>
+                <button type="submit" class="btn btn-success m-1">
+                    Descargar Todos PDF
+                </button>
+            </div>
+        </form>
         }
     </div>
 </div>

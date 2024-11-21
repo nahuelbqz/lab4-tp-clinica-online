@@ -16,8 +16,8 @@
   padding: 35px;
   display: flex;
   align-items: center;
-  max-width: 100%; /* Se ajusta al ancho de la pantalla */
-  width: auto; /* Ajusta el ancho según el contenido */
+  max-width: 100%; 
+  width: auto; 
   margin: 20px;
   box-sizing: border-box;
 }
@@ -27,7 +27,7 @@
 }
 
 .profile-image {
-  width: 150px; /* Ajusta el tamaño según necesites */
+  width: 150px; 
   height: 150px;
   border-radius: 50%;
   object-fit: cover;

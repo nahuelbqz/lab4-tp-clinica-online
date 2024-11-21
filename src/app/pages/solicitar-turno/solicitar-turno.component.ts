@@ -10,11 +10,12 @@ import { TurnosService } from '../../services/turnos.service';
 import { AuthService } from '../../services/auth.service';
 import { EspecialidadInterfaceId } from '../../interfaces/especialidad';
 import { hourFormatPipe } from '../../pipes/hour-format.pipe';
+import { DayFormatPipe } from '../../pipes/day-format.pipe';
 
 @Component({
   selector: 'app-solicitar-turno',
   standalone: true,
-  imports: [FormsModule, hourFormatPipe],
+  imports: [FormsModule, DayFormatPipe, hourFormatPipe],
   templateUrl: './solicitar-turno.component.html',
   styleUrl: './solicitar-turno.component.css',
 })
@@ -70,23 +71,23 @@ export class SolicitarTurnoComponent {
     });
   }
 
-  // Método actualizado
   clickEspecialista(usuario: EspecialistaInterfaceId) {
     this.especialistaElegido = usuario.mail;
-    // Filtra especialidades basadas en las especialidades del especialista seleccionado
     this.especialidadesFiltradas =
       this.arrayEspecialidades?.filter((especialidad) =>
         usuario.especialidad.includes(especialidad.nombre)
       ) || [];
+
+    this.filtrarTurnosPorEspecialista(this.especialistaElegido);
     this.calculateFutureDays(usuario);
     console.log('Especialista seleccionado:', usuario);
   }
 
-  // Método clickEspecialidad actualizado
   clickEspecialidad(nombreEspecialidad: string) {
     if (nombreEspecialidad) {
       this.especialidadString = nombreEspecialidad;
-      this.especialidadElegida = nombreEspecialidad; // Se asigna la especialidad elegida
+      this.especialidadElegida = nombreEspecialidad;
+
       this.filtrarTurnosPorEspecialista(this.especialistaElegido);
       console.log('Especialidad seleccionada:', nombreEspecialidad);
     }
@@ -132,7 +133,7 @@ export class SolicitarTurnoComponent {
       const buttons = this.generateButtons(futureDate, usuario);
 
       this.futureDays.push({
-        date: this.formatDate(futureDate), // Usa el nuevo formato aquí
+        date: this.formatDate(futureDate),
         day: dayOfWeek,
         buttons: buttons,
       });
@@ -152,53 +153,53 @@ export class SolicitarTurnoComponent {
       startHour = usuario.deSemana;
       endHour = usuario.hastaSemana;
     } else if (dayOfWeek === 6) {
-      // Sabados
+      // Sábados
       startHour = usuario.deSabado;
       endHour = usuario.hastaSabado;
     } else {
-      // Domingo
+      // Domingo no genera botones
       return buttons;
     }
 
     for (let hour = startHour; hour <= endHour; hour++) {
-      this.addButton(buttons, date, hour, 0);
+      this.addAvailableButton(buttons, date, hour, 0);
       if (hour !== endHour) {
-        this.addButton(buttons, date, hour, 30);
+        this.addAvailableButton(buttons, date, hour, 30);
       }
     }
 
     return buttons;
   }
-  addButton(
+
+  addAvailableButton(
     buttons: { time: string; selected: boolean }[],
     date: Date,
     hour: number,
     minute: number
   ): void {
     const time = this.formatTime(hour, minute);
-    const formattedDate = this.formatDate(date); // Asegúrate de usar el formato completo
+    const formattedDate = this.formatDate(date);
 
-    if (
-      !this.turnosFiltrados.some(
-        (turnos) => turnos.date == formattedDate && turnos.time == time
-      )
-    ) {
-      buttons.push({ time: time, selected: false });
+    // Verifica si el turno esta tomado
+    const turnoTomado = this.turnosFiltrados.some(
+      (turno) => turno.date === formattedDate && turno.time === time
+    );
+
+    if (!turnoTomado) {
+      buttons.push({ time, selected: false });
     }
   }
 
   formatDate(date: Date): string {
-    const year = date.getFullYear();
+    const day =
+      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
     const month =
       date.getMonth() + 1 < 10
         ? `0${date.getMonth() + 1}`
         : `${date.getMonth() + 1}`;
-    const day =
-      date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-
-    return `${year}-${month}-${day}`;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
-
   formatTime(hour: number, minute: number): string {
     const hourStr = hour < 10 ? `0${hour}` : `${hour}`;
     const minuteStr = minute < 10 ? `0${minute}` : `${minute}`;
@@ -245,10 +246,8 @@ export class SolicitarTurnoComponent {
         button.selected = !button.selected;
 
         if (button.selected) {
-          // Agregar el turno al array de turnosElegidos
           this.turnosElegidos.push({ date: dateBtn, time: timeBtn });
         } else {
-          // Quitar el turno del array de turnosElegidos
           const index = this.turnosElegidos.findIndex(
             (b) => b.time === timeBtn && b.date === dateBtn
           );
@@ -267,7 +266,7 @@ export class SolicitarTurnoComponent {
       if (this.turnosElegidos.length == 0) {
         this.toastAlert.error('No hay ningun turno', 'Error');
       } else {
-        let savePromises: Promise<void>[] = []; // Array para almacenar las promesas
+        let savePromises: Promise<void>[] = [];
 
         this.turnosElegidos.forEach((btn) => {
           if (this.authService.currentUserSig()?.rol == 'admin') {
@@ -328,7 +327,6 @@ export class SolicitarTurnoComponent {
           }
         });
 
-        // Esperar a que todas las promesas se resuelvan
         Promise.all(savePromises).then(() => {
           this.router.navigate(['/bienvenida']);
         });

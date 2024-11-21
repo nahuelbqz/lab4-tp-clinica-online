@@ -81,7 +81,7 @@
         @for (day of futureDays; track $index) {
         @for (button of day.buttons; track $index) {
         <button (click)="onDayAndHourClick(day.date, button.time)" class="btn-boton-dias m-1">
-          {{ day.date }} - {{ button.time | hourFormatPipe }}
+          {{ day.date | dayFormat }} - {{ button.time | hourFormat }}
         </button>
         }
         }

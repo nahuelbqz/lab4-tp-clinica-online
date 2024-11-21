@@ -1,54 +1,75 @@
 <div class="d-flex justify-content-center align-items-center min-100vh">
     <div class="container">
-        <h1>Pacientes</h1>
+        <h1 class="text-center fw-bold">Pacientes Atendidos</h1>
 
-        <!-- Lista Historia Clínica Pacientes -->
-        @if(authService.currentUserSig()?.rol === 'admin' ||
-        authService.currentUserSig()?.rol === 'especialista' ||
-        authService.currentUserSig()?.rol === 'paciente') {
-
-        <h2>Historia clinica</h2>
-        <div class="row">
-            @for (historial of listaHistorial; track historial.id){
-            <div class="col-md-6 col-sm-12 mt-3">
-                <div class="card" style="width: 100%">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            Paciente: {{ historial.mailPaciente }}
-                        </li>
-                        <li class="list-group-item">
-                            Especialidad: {{ historial.especialidad }}
-                        </li>
-                        <li class="list-group-item">
-                            Temperatura: {{ historial.temperatura }}
-                        </li>
-                        <li class="list-group-item">Peso: {{ historial.peso }}</li>
-                        <li class="list-group-item">Presion: {{ historial.presion }}</li>
-                        <li class="list-group-item">Altura: {{ historial.altura }}</li>
-                        <li class="list-group-item">
-                            {{ historial.arrayObservaciones[0] }}:
-                            {{ historial.arrayObservaciones[1] }}
-                        </li>
-                        <li class="list-group-item">
-                            {{ historial.arrayObservaciones[2] }}:
-                            {{ historial.arrayObservaciones[3] }}
-                        </li>
-                        <li class="list-group-item">
-                            {{ historial.arrayObservaciones[4] }}:
-                            {{ historial.arrayObservaciones[5] }}
-                        </li>
-                    </ul>
-                    <div class="card-footer d-flex justify-content-center">
-                        <button (click)="descargarPDF(historial)" class="btn btn-success m-1">
-                            Descargar PDF
+        <ng-container *ngIf="listaPacientesAtendidos.length > 0; else noPacientes">
+            <div class="row justify-content-center">
+                <div *ngFor="let paciente of listaPacientesAtendidos" class="col-6 col-md-3 text-center mb-4">
+                    <div class="container-btn" (click)="verHistorialPaciente(paciente)">
+                        <button class="btn-circular">
+                            <img [src]="paciente.imagenUno" alt="{{ paciente.nombre }}" />
                         </button>
                     </div>
+                    <p class="mt-2 fw-bold text-white">
+                        {{ paciente.nombre }} {{ paciente.apellido }}
+                    </p>
                 </div>
             </div>
-            }
-        </div>
+        </ng-container>
 
-        <!-- todos pdf y ult turno -->
-        }
+        <ng-template #noPacientes>
+            <p class="text-center fw-bold">No se han atendido pacientes aún.</p>
+        </ng-template>
+
+        <div *ngIf="historialActivo.length > 0" class="mt-5">
+            <h3 class="text-center fw-bold">Historial Clínico de {{ pacienteSeleccionado?.nombre }}</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <!-- <th>Atendido por</th> -->
+                            <th>Especialidad</th>
+                            <th>Temperatura</th>
+                            <th>Peso</th>
+                            <th>Presión</th>
+                            <th>Altura</th>
+                            <th>Observaciones</th>
+                            <th> </th>
+                            <th> </th>
+                            <th>Reseña</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let historial of historialActivo">
+                            <td>{{ historial.mailPaciente }}</td>
+                            <!-- <td>{{ historial.mailEspecialistas }}</td> -->
+                            <td>{{ historial.especialidad }}</td>
+                            <td>{{ historial.temperatura }}</td>
+                            <td>{{ historial.peso }}</td>
+                            <td>{{ historial.presion }}</td>
+                            <td>{{ historial.altura }}</td>
+                            <td>
+                                {{ historial.arrayObservaciones[0] }}:
+                                {{ historial.arrayObservaciones[1] }}
+                            </td>
+                            <td>
+                                {{ historial.arrayObservaciones[2] }}:
+                                {{ historial.arrayObservaciones[3] }}
+                            </td>
+                            <td>
+                                {{ historial.arrayObservaciones[4] }}:
+                                {{ historial.arrayObservaciones[5] }}
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-sm" (click)="pacienteVerResena(historial)">
+                                    Ver reseña
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

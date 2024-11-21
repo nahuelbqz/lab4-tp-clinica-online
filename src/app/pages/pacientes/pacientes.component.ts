@@ -8,129 +8,136 @@ import { AuthService } from '../../services/auth.service';
 import { EspecialidadService } from '../../services/especialidad.service';
 import { HistoriaClinicaService } from '../../services/historia-clinica.service';
 import { TurnosService } from '../../services/turnos.service';
+import { PacienteInterfaceId } from '../../interfaces/paciente';
+import { NgFor, NgIf } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pacientes',
   standalone: true,
-  imports: [],
+  imports: [NgIf, NgFor],
   templateUrl: './pacientes.component.html',
   styleUrl: './pacientes.component.css',
 })
 export class PacientesComponent {
-  authService = inject(AuthService);
-  historialService = inject(HistoriaClinicaService);
-  turnosService = inject(TurnosService);
-  especialidadService = inject(EspecialidadService);
-  fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private historialService = inject(HistoriaClinicaService);
+  private turnosService = inject(TurnosService);
+  private especialidadService = inject(EspecialidadService);
 
-  arrayEspecialidades?: EspecialidadInterfaceId[];
-
+  arrayEspecialidades: EspecialidadInterfaceId[] = [];
   listaHistorial: HistoriaClinicaInterfaceId[] = [];
   listaTurnos: turnoInterfaceId[] = [];
-
-  form = this.fb.nonNullable.group({
-    especialidad: ['', Validators.required],
-  });
+  listaPacientesAtendidos: PacienteInterfaceId[] = [];
+  historialActivo: HistoriaClinicaInterfaceId[] = [];
+  pacienteSeleccionado: PacienteInterfaceId | null = null;
 
   ngOnInit(): void {
-    setTimeout(() => {
-      const currentUser = this.authService.currentUserSig();
-      if (currentUser?.rol === 'paciente') {
-        const userEmail = currentUser.email;
-        if (userEmail) {
-          this.historialService.getHistoriaClinica().subscribe((data) => {
-            this.listaHistorial = data.filter((historial) => {
-              return historial.mailPaciente === userEmail;
-            });
-          });
-          this.turnosService.getTurnos().subscribe((data) => {
-            this.listaTurnos = data;
-          });
-        }
-      } else if (currentUser?.rol === 'especialista') {
-        this.historialService.getHistoriaClinica().subscribe((data) => {
-          this.listaHistorial = [];
-          this.authService
-            .getUsuarioId(currentUser.email)
-            .then((usuarioEspecialista) => {
-              if (usuarioEspecialista) {
-                usuarioEspecialista.usuariosAtentidos.forEach(
-                  (usuarioPaciente: string) => {
-                    data.forEach((historial) => {
-                      if (historial.mailPaciente == usuarioPaciente) {
-                        this.listaHistorial.push(historial);
-                      }
-                    });
-                  }
-                );
-              }
-            });
-        });
-      } else if (currentUser?.rol === 'admin') {
-        const userEmail = currentUser.email;
-        if (userEmail) {
-          this.historialService.getHistoriaClinica().subscribe((data) => {
-            this.listaHistorial = data;
-          });
-        }
-      }
-    }, 2000);
+    this.loadEspecialidades();
+    this.loadUserData();
+  }
+
+  private loadEspecialidades(): void {
     this.especialidadService.getEspecialidad().subscribe((data) => {
       this.arrayEspecialidades = data;
     });
   }
 
-  descargarPDF(historial: HistoriaClinicaInterfaceId) {
-    const doc = new jsPDF();
-    doc.addImage('assets/hospital-logo-icons8.png', 'PNG', 10, 10, 30, 30); //logo
-    doc.setFont('Courier');
-    doc.setFontSize(50);
-    doc.text('Clinica online', 45, 30);
+  private loadUserData(): void {
+    const currentUser = this.authService.currentUserSig();
 
-    doc.setFontSize(30);
-    doc.text('Historia Clinica', 10, 60);
+    if (!currentUser) return;
 
-    doc.setFontSize(25);
-    doc.text(`Paciente: ${historial.mailPaciente}`, 10, 80);
-
-    doc.setFontSize(25);
-    doc.text(`Especialidad: ${historial.especialidad}`, 10, 90);
-
-    doc.setFontSize(20);
-    doc.text(`Altura: ${historial.altura}`, 10, 100);
-    doc.text(`Peso: ${historial.peso}`, 10, 110);
-    doc.text(`Temperatura: ${historial.temperatura}`, 10, 120);
-    doc.text(`Presion: ${historial.presion}`, 10, 130);
-    doc.text(
-      `${historial.arrayObservaciones[0]}: ${historial.arrayObservaciones[1]}`,
-      10,
-      140
-    );
-    doc.text(
-      `${historial.arrayObservaciones[2]}: ${historial.arrayObservaciones[3]}`,
-      10,
-      150
-    );
-    doc.text(
-      `${historial.arrayObservaciones[4]}: ${historial.arrayObservaciones[5]}`,
-      10,
-      160
-    );
-    doc.text(`Fecha: ${this.obtenerFechaActual()}`, 10, 190);
-
-    doc.save(`${historial.mailPaciente}_hitorial_clinica.pdf`);
+    if (currentUser.rol === 'paciente') {
+      this.loadPatientData(currentUser.email);
+    } else if (currentUser.rol === 'especialista') {
+      this.loadEspecialistaData(currentUser.email);
+    } else if (currentUser.rol === 'admin') {
+      this.loadAdminData();
+    }
   }
 
-  obtenerFechaActual(): string {
-    const fecha = new Date();
+  private loadPatientData(email: string): void {
+    this.historialService.getHistoriaClinica().subscribe((data) => {
+      this.listaHistorial = data.filter(
+        (historial) => historial.mailPaciente === email
+      );
+    });
+    this.loadTurnos();
+  }
 
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-    const año = fecha.getFullYear();
+  private loadEspecialistaData(email: string): void {
+    this.historialService.getHistoriaClinica().subscribe((data) => {
+      this.authService.getUsuarioId(email).then((especialista) => {
+        if (especialista) {
+          especialista.usuariosAtentidos.forEach((mailPaciente: string) => {
+            data.forEach((historial) => {
+              if (historial.mailPaciente === mailPaciente) {
+                this.listaHistorial.push(historial);
+              }
+            });
+          });
+        }
+      });
+    });
+    this.loadTurnos();
+    this.loadPacientesAtendidos(email);
+  }
 
-    const horas = String(fecha.getHours()).padStart(2, '0');
-    const minutos = String(fecha.getMinutes()).padStart(2, '0');
+  private loadAdminData(): void {
+    this.historialService.getHistoriaClinica().subscribe((data) => {
+      this.listaHistorial = data;
+    });
+  }
 
-    return `${dia}/${mes}/${año} ${horas}:${minutos}`;
+  private loadTurnos(): void {
+    this.turnosService.getTurnos().subscribe((data) => {
+      this.listaTurnos = data;
+    });
+  }
+
+  private loadPacientesAtendidos(emailEspecialista: string): void {
+    this.authService.getUsuarioId(emailEspecialista).then((especialista) => {
+      if (especialista) {
+        especialista.usuariosAtentidos.forEach((mailPaciente: string) => {
+          this.authService.getUsuario(mailPaciente).then((paciente) => {
+            if (paciente) this.listaPacientesAtendidos.push(paciente);
+          });
+        });
+      }
+    });
+  }
+
+  verHistorialPaciente(paciente: PacienteInterfaceId): void {
+    this.pacienteSeleccionado = paciente;
+    this.historialService.getHistoriaClinica().subscribe((data) => {
+      this.historialActivo = data.filter(
+        (historial) => historial.mailPaciente === paciente.mail
+      );
+    });
+  }
+
+  pacienteVerResena(historial: HistoriaClinicaInterfaceId): void {
+    const turnoRelacionado = this.listaTurnos.find(
+      (turno) => turno.id === historial.idTurno
+    );
+
+    if (turnoRelacionado) {
+      Swal.fire({
+        title: 'Reseña del especialista',
+        text:
+          turnoRelacionado.comentarioEspecialista ||
+          'No hay comentarios disponibles',
+        icon: 'info',
+        confirmButtonColor: '#3085d6',
+      });
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se encontró la reseña para este turno',
+        icon: 'error',
+        confirmButtonColor: '#d33',
+      });
+    }
   }
 }
