@@ -1,27 +1,43 @@
-# ClinicaOnlineTp
+# TRABAJO PRÁCTICO N°2 CLINICA ONLINE
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.
+## Alumno
 
-## Development server
+-Nahuel Borquez
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Descripción del trabajo
 
-## Code scaffolding
+El proyecto consiste en una clinica online en la que los usuarios pacientes pueden sacar turnos con los usuarios especialistas, en los horarios y dias que los especialistas esten disponibles, la clinica esta abierta al público de lunes a viernes en el horario de 8:00 a 19:00, y los sábados en el horario de 8:00 a 14:00.
+Los usuarios especialistas van a poder aceptar, rechazar o cancelar los turnos solicitados. Al finalizar un turno deben cargar los datos del paciente y dar una reseña del turno.
+La clinica ademas cuenta con un sector de administracion, en la que solo pueden acceder los usuarios administradores para la gestion de la clinica, en esta parte vamos a poder ver todos los usuarios registrados y validar a los especialistas, tambien tenemos acceso a un apartado de informes, donde vamos a poder visualizar distintos datos de la clinica.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Bienvenida
 
-## Build
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/bienvenida.jpg">
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Login
 
-## Running unit tests
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/login.jpg">
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Registro
 
-## Running end-to-end tests
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/registro.jpg">
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Solicitar turno
 
-## Further help
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/solicitar-turno.jpg">
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Mis turnos
+
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/mis-turnos.png">
+
+## Mi perfil
+
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/mi-perfil.jpg">
+
+## Seccion usuarios
+
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/seccion-usuarios.png">
+
+## Informes
+
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/informes.jpg">

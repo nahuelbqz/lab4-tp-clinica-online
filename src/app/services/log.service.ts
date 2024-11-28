@@ -18,7 +18,7 @@ export class LogService {
     const col = collection(this.firestore, 'logs');
     return addDoc(col, log);
   }
-  traerLog() {
+  traerLogs() {
     const col = collection(this.firestore, 'logs');
     return collectionData(col, { idField: 'id' }) as Observable<
       LogInterfaceId[]

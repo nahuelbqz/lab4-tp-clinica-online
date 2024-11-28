@@ -11,11 +11,12 @@ import { AuthService } from '../../services/auth.service';
 import { EspecialidadInterfaceId } from '../../interfaces/especialidad';
 import { hourFormatPipe } from '../../pipes/hour-format.pipe';
 import { DayFormatPipe } from '../../pipes/day-format.pipe';
+import { EspecialidadImagenPipe } from '../../pipes/especialidad-imagen.pipe';
 
 @Component({
   selector: 'app-solicitar-turno',
   standalone: true,
-  imports: [FormsModule, DayFormatPipe, hourFormatPipe],
+  imports: [FormsModule, DayFormatPipe, hourFormatPipe, EspecialidadImagenPipe],
   templateUrl: './solicitar-turno.component.html',
   styleUrl: './solicitar-turno.component.css',
 })

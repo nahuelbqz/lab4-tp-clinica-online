@@ -1,4 +1,4 @@
-<div class="login-container d-flex justify-content-center align-items-center">
+<div class="login-container d-flex justify-content-center align-items-center" [@slideIn]>
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
       <img src="/assets/hospital-logo-icons8.png" alt="login-icon" style="height: 7rem" />
@@ -64,7 +64,7 @@
     <button (click)="cargarUsuario(4)" type="button" class="btnCircular" title="Especialista 1">
       <img [src]="imgUsuario4" alt="" />
     </button>
-    <button (click)="cargarUsuario(5)" type="button" class="btnCircular" title="Especialista 1">
+    <button (click)="cargarUsuario(5)" type="button" class="btnCircular" title="Especialista 2">
       <img [src]="imgUsuario5" alt="" />
     </button>
     <button (click)="cargarUsuario(6)" type="button" class="btnCircular" title="Admin">

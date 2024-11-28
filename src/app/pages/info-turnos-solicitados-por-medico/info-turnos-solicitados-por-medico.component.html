@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="chart-container">
+        <h1 class="fw-bold">Turnos solicitados por medico</h1>
+        <div class="form-container">
+            <div class="input-group">
+                <label for="startDate">Desde:</label>
+                <input id="startDate" [(ngModel)]="startDate" type="text" class="form-control"
+                    placeholder="Fecha Inicio" />
+            </div>
+            <div class="input-group">
+                <label for="endDate">Hasta:</label>
+                <input id="endDate" [(ngModel)]="endDate" type="text" class="form-control" placeholder="Fecha Final" />
+            </div>
+            <button (click)="clickBuscar()" class="btn btn-outline-secondary" type="button">Buscar</button>
+        </div>
+        <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+            [legend]="showLegend" [labels]="showLabels" [doughnut]="isDoughnut" legendTitle="Especialista"
+            [arcWidth]="0.55">
+        </ngx-charts-pie-chart>
+        <button (click)="descargarPDF(single)" type="button" class="btn btn-success">
+            Descargar
+        </button>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+.min-100vh {
+  min-height: 100vh;
+  background-image: url("../../../../public/assets/hospital-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  background-color: #fff; 
+  border: 3px solid black;
+  border-radius: 15px; 
+  padding: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  max-width: 90%; 
+}
+
+ngx-charts-bar-vertical {
+  display: block; 
+  width: 100%; 
+}

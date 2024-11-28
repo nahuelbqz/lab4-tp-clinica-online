@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="chart-container">
+        <h1 class="fw-bold">Turnos finalizados por médico</h1>
+        <div class="form-container">
+            <div class="input-group">
+                <label for="startDate">Desde:</label>
+                <input id="startDate" [(ngModel)]="startDate" type="text" class="form-control"
+                    placeholder="Fecha Inicio" />
+            </div>
+            <div class="input-group">
+                <label for="endDate">Hasta:</label>
+                <input id="endDate" [(ngModel)]="endDate" type="text" class="form-control" placeholder="Fecha Final" />
+            </div>
+            <button (click)="clickBuscar()" class="btn btn-outline-secondary" type="button">Buscar</button>
+        </div>
+        <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+            [xAxis]="true" [yAxis]="true" [legend]="showLegend" [legendTitle]="legenTitle" [showXAxisLabel]="true"
+            [showYAxisLabel]="true" [xAxisLabel]="'Cantidad'" [yAxisLabel]="'Especialistas'" [barPadding]="30">
+        </ngx-charts-bar-horizontal>
+        <button (click)="descargarPDF(single)" type="button" class="btn btn-success">Descargar</button>
+    </div>
+</div>

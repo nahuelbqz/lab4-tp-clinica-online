@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+    <div class="container">
+        <h1 class="fw-bold">Listado de logs</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let log of logs">
+                        <td>{{ log.email }}</td>
+                        <td>{{ log.date }}</td>
+                        <td>{{ log.time }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button (click)="descargarPDF(logs)" type="button" class="btn btn-success">
+            Descargar
+        </button>
+    </div>
+</div>

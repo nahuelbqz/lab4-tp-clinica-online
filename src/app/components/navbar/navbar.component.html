@@ -8,7 +8,7 @@
 
     @if(authService.currentUserSig()?.rol == "admin"){
     <a routerLink="/usuarios">Usuarios</a>
-    <a routerLink="/estadisticas">Estadisticas</a>
+    <a routerLink="/informes">Informes</a>
     } @if(authService.currentUserSig()?.rol == "paciente" || authService.currentUserSig()?.rol == "admin"){
     <a routerLink="/solicitar-turno">Solicitar Turno</a>
     } @if(authService.currentUserSig()?.rol == "paciente" || authService.currentUserSig()?.rol == "especialista"){

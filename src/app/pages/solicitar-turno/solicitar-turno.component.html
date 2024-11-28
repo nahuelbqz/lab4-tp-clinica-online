@@ -25,7 +25,8 @@
         <div class="contenedorEspecialistas">
           <span class="fw-bold">{{ especialidad.nombre }}</span>
           <button class="btn-cuadrado m-1" (click)="clickEspecialidad(especialidad.nombre)">
-            <img src="/assets/especialista.png" alt="" width="80px" height="80px">
+            <img [src]="especialidad.nombre | especialidadImagen" alt="{{ especialidad.nombre }}" width="80px"
+              height="80px">
           </button>
         </div>
       </div>

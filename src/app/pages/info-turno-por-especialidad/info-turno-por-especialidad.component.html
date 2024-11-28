@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center align-items-center min-100vh">
+  <div class="chart-container">
+    <h1 class="fw-bold">Turnos por especialidad</h1>
+    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+      [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)"
+      [legendTitle]="legenTitle">
+    </ngx-charts-bar-vertical>
+    <button (click)="descargarPDF(single)" type="button" class="btn btn-success mt-3">
+      Descargar
+    </button>
+  </div>
+</div>

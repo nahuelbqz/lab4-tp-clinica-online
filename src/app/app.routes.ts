@@ -120,6 +120,49 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'informes',
+    loadComponent: () =>
+      import('./pages/informes/informes.component').then(
+        (m) => m.InformesComponent
+      ),
+  },
+  {
+    path: 'informes-logs',
+    loadComponent: () =>
+      import('./pages/info-logs/info-logs.component').then(
+        (m) => m.InfoLogsComponent
+      ),
+  },
+  {
+    path: 'informes-turnos-por-especialidad',
+    loadComponent: () =>
+      import(
+        './pages/info-turno-por-especialidad/info-turno-por-especialidad.component'
+      ).then((m) => m.InfoTurnoPorEspecialidadComponent),
+  },
+  {
+    path: 'informes-turnos-por-dia',
+    loadComponent: () =>
+      import('./pages/info-turno-por-dia/info-turno-por-dia.component').then(
+        (m) => m.InfoTurnoPorDiaComponent
+      ),
+  },
+  {
+    path: 'informes-turnos-solicitados-por-medico',
+    loadComponent: () =>
+      import(
+        './pages/info-turnos-solicitados-por-medico/info-turnos-solicitados-por-medico.component'
+      ).then((m) => m.InfoTurnosSolicitadosPorMedicoComponent),
+  },
+  {
+    path: 'informes-turnos-finalizados-por-medico',
+    loadComponent: () =>
+      import(
+        './pages/info-turnos-finalizado-por-medico/info-turnos-finalizado-por-medico.component'
+      ).then((m) => m.InfoTurnosFinalizadoPorMedicoComponent),
+  },
+
+  {
     path: 'error',
     loadComponent: () =>
       import('./pages/error/error.component').then((m) => m.ErrorComponent),

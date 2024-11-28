@@ -10,15 +10,12 @@ export class HoverTooltipDirective {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   @HostListener('mouseenter') onMouseEnter() {
-    // Cambiar el puntero a una mano
     this.renderer.setStyle(this.el.nativeElement, 'cursor', 'pointer');
 
-    // Crear el tooltip
     this.tooltipElement = this.renderer.createElement('span');
     const text = this.renderer.createText('Descargar Excel de usuario');
     this.renderer.appendChild(this.tooltipElement, text);
 
-    // Agregar estilos al tooltip
     this.renderer.setStyle(this.tooltipElement, 'position', 'absolute');
     this.renderer.setStyle(
       this.tooltipElement,
@@ -33,7 +30,6 @@ export class HoverTooltipDirective {
     this.renderer.setStyle(this.tooltipElement, 'pointer-events', 'none');
     this.renderer.setStyle(this.tooltipElement, 'z-index', '1000');
 
-    // Posicionar el tooltip
     this.renderer.setStyle(
       this.tooltipElement,
       'top',
@@ -45,12 +41,10 @@ export class HoverTooltipDirective {
       `${this.el.nativeElement.offsetLeft}px`
     );
 
-    // Adjuntar el tooltip al cuerpo
     this.renderer.appendChild(document.body, this.tooltipElement);
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    // Eliminar el tooltip al salir del elemento
     if (this.tooltipElement) {
       this.renderer.removeChild(document.body, this.tooltipElement);
       this.tooltipElement = null;

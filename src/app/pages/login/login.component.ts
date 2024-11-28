@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { LogService } from '../../services/log.service';
 import { LogInterface } from '../../interfaces/log';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,23 @@ import { LogInterface } from '../../interfaces/log';
   imports: [ReactiveFormsModule, FormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ transform: 'translateX(100%)' }),
+        animate(
+          '300ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+          style({ transform: 'translateX(0)' })
+        ),
+      ]),
+      transition(':leave', [
+        animate(
+          '300ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+          style({ transform: 'translateX(-100%)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class LoginComponent implements OnInit {
   toastService = inject(ToastrService);
