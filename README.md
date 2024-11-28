@@ -12,7 +12,7 @@ La clinica ademas cuenta con un sector de administracion, en la que solo pueden 
 
 ## Bienvenida
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/bienvenida.jpg">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/bienvenida.jpg">
 
 ## Login
 
