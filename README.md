@@ -16,28 +16,28 @@ La clinica ademas cuenta con un sector de administracion, en la que solo pueden 
 
 ## Login
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/login.jpg">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/login.jpg">
 
 ## Registro
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/registro.jpg">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/registro.jpg">
 
 ## Solicitar turno
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/solicitar-turno.jpg">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/solicitar-turno.jpg">
 
 ## Mis turnos
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/mis-turnos.png">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/mis-turnos.png">
 
 ## Mi perfil
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/mi-perfil.jpg">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/mi-perfil.jpg">
 
 ## Seccion usuarios
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/seccion-usuarios.png">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/seccion-usuarios.png">
 
 ## Informes
 
-<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/tree/main/public/assets/readme/informes.jpg">
+<img src="https://github.com/nahuelbqz/lab4-tp-clinica-online/blob/main/public/assets/readme/informes.jpg">
